@@ -1,12 +1,14 @@
 <script setup>
 import { useDark, useDateFormat, useNow, useToggle } from "@vueuse/core";
+import { ref } from "vue";
+import ListTransition from "./components/ListTransition.vue";
 
-const formatted = useDateFormat(useNow(), "MM-DD-YYYY HH:mm:ss");
+const formatted = useDateFormat(useNow(), "DD/MM/YYYY HH:mm:ss");
 
 const isDark = useDark({
   disableTransition: false,
 });
-
+const show = ref(true);
 const toggleDark = useToggle(isDark);
 </script>
 
@@ -19,4 +21,23 @@ const toggleDark = useToggle(isDark);
     </button>
     <h1 class="text-3xl">{{ formatted }}</h1>
   </div>
+  <div>
+    <button class="bg-black text-white" @click="show = !show">
+      Toggle transition
+    </button>
+    <transition name="fade"><p v-if="show">Transition ...</p> </transition>
+  </div>
+  <ListTransition :initial-items="[...Array(10).keys()]" />
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
