@@ -1,7 +1,8 @@
 <script setup>
 import { useDark, useDateFormat, useNow, useToggle } from "@vueuse/core";
 import { ref } from "vue";
-import ListTransition from "./components/ListTransition.vue";
+// import ListTransition from "./components/ListTransition.vue";
+import StateTransition from "./components/StateTransition.vue";
 
 const formatted = useDateFormat(useNow(), "DD/MM/YYYY HH:mm:ss");
 
@@ -27,7 +28,8 @@ const toggleDark = useToggle(isDark);
     </button>
     <transition name="fade"><p v-if="show">Transition ...</p> </transition>
   </div>
-  <ListTransition :initial-items="[...Array(10).keys()]" />
+  <br />
+  <StateTransition />
 </template>
 
 <style>
