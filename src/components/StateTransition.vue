@@ -17,10 +17,17 @@ export default {
       gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
     },
   },
+  directives: {
+    focus: {
+      mounted(el) {
+        el.focus();
+      },
+    },
+  },
 };
 </script>
 
 <template>
-  <input v-model.number="number" type="number" step="25" />
+  <input v-focus v-model.number="number" type="number" step="25" />
   <p>{{ animatedNumber }}</p>
 </template>
